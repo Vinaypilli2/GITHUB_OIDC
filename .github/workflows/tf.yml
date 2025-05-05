@@ -1,0 +1,23 @@
+# .github/workflows/auth-gcp.yaml
+name: Authenticate to GCP
+
+permissions:
+  id-token: write
+  contents: read
+
+jobs:
+  auth:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Authenticate to GCP using OIDC
+        uses: google-github-actions/auth@v2
+        with:
+          token_format: "access_token"
+          workload_identity_provider: "projects/827812434085/locations/global/workloadIdentityPools/github-pool/providers/github-provider"
+          service_account: "github-actions-sa@direct-outlet-458407-n6.iam.gserviceaccount.com"
+
+      - name: Use gcloud
+        run: gcloud auth list
