@@ -1,5 +1,10 @@
-# .github/workflows/auth-gcp.yaml
 name: Authenticate to GCP
+
+on:
+  push:
+    branches:
+      - main
+  workflow_dispatch:  # Allows you to manually trigger it from GitHub UI
 
 permissions:
   id-token: write
